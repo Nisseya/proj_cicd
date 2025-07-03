@@ -1,7 +1,10 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
+ eslint
 import PropTypes from 'prop-types';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+ dev
 
 const TaskContext = createContext();
 
@@ -24,7 +27,7 @@ export const TaskProvider = ({ children }) => {
 
     try {
       setLoading(true);
-      const response = await axios.get('/api/tasks');
+      const response = await axios.get(`${API_BASE_URL}/api/tasks`);
       setTasks(response.data);
     } catch (error) {
       console.error('Erreur lors du chargement des tâches:', error);
@@ -37,7 +40,7 @@ export const TaskProvider = ({ children }) => {
     if (!token) return;
 
     try {
-      const response = await axios.get('/api/users');
+      const response = await axios.get(`${API_BASE_URL}/users`);
       setUsers(response.data);
     } catch (error) {
       console.error('Erreur lors du chargement des utilisateurs:', error);
@@ -46,7 +49,7 @@ export const TaskProvider = ({ children }) => {
 
   const createTask = async (taskData) => {
     try {
-      const response = await axios.post('/api/tasks', taskData);
+      const response = await axios.post(`${API_BASE_URL}/api/tasks`, taskData);
       setTasks(prev => [...prev, response.data]);
       return { success: true };
     } catch (error) {
@@ -59,7 +62,7 @@ export const TaskProvider = ({ children }) => {
 
   const updateTask = async (id, taskData) => {
     try {
-      const response = await axios.put(`/api/tasks/${id}`, taskData);
+      const response = await axios.put(`${API_BASE_URL}/api/tasks/${id}`, taskData);
       setTasks(prev => prev.map(task => 
         task.id === id ? response.data : task
       ));
@@ -74,7 +77,7 @@ export const TaskProvider = ({ children }) => {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`/api/tasks/${id}`);
+      await axios.delete(`${API_BASE_URL}/api/tasks/${id}`);
       setTasks(prev => prev.filter(task => task.id !== id));
       return { success: true };
     } catch (error) {
