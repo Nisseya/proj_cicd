@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -60,7 +61,7 @@ const Login = () => {
         </button>
 
         <p>
-          Pas de compte ? <Link to="/register">S'inscrire</Link>
+          Pas de compte ? <Link to="/register">Sinscrire</Link>
         </p>
       </form>
     </div>

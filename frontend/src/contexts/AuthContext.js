@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const AuthContext = createContext();
@@ -20,8 +21,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      // Ici on pourrait vérifier la validité du token
-      setUser({ token }); // Simplifié pour l'exemple
+      setUser({ token });
     }
     setLoading(false);
   }, [token]);
@@ -30,12 +30,12 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axios.post(`${API_BASE_URL}/api/auth/login`, { email, password });
       const { token, user } = response.data;
-      
+
       localStorage.setItem('token', token);
       setToken(token);
       setUser(user);
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      
+
       return { success: true };
     } catch (error) {
       return { 
@@ -53,12 +53,12 @@ export const AuthProvider = ({ children }) => {
         name 
       });
       const { token, user } = response.data;
-      
+
       localStorage.setItem('token', token);
       setToken(token);
       setUser(user);
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      
+
       return { success: true };
     } catch (error) {
       return { 
@@ -89,4 +89,8 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
