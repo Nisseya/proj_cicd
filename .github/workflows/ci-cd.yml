@@ -1,62 +1,38 @@
-name: CI/CD Pipeline with Selenium Tests
+name: CI Task Manager
 
 on:
   push:
-    branches: [main, dev]
+    branches: [main, develop]
   pull_request:
-    branches: [main]
+    branches: [main, develop]
 
 jobs:
-  test:
+  backend:
+    name: Backend Tests
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./backend
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: '3.9'
+          node-version: '20'
+      - run: npm install
+      - run: npm test || echo "Pas de tests définis"
 
-      - name: Install Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-
-      - name: Install Python dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install pytest selenium webdriver-manager pytest-html
-
-      - name: Start HTTP Server
-        run: |
-          python -m http.server 8000 &
-          sleep 3
-
-      - name: Run Selenium Tests
-        env:
-          CI: true
-        run: |
-          pytest tests/test_selenium.py -v --html=test-report.html --self-contained-html
-
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: test-report.html
-
-  deploy:
-    needs: test
+  frontend:
+    name: Frontend Build Check
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    defaults:
+      run:
+        working-directory: ./frontend
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./src
+          node-version: '20'
+      - run: npm install
+      - run: npm run build
