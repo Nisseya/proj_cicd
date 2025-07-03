@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
 import PropTypes from 'prop-types';
-
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const TaskContext = createContext();
 
 export const useTask = () => {
