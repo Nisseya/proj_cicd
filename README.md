@@ -1,26 +1,26 @@
-# 🗂️ Gestionnaire de Tâches Web
+# Gestionnaire de Tâches Web
 
-## 📌 Description
+##  Description
 
 **Gestionnaire de Tâches Web** est une application collaborative permettant de créer, suivre, et organiser des tâches avec des priorités, des statuts et une attribution à des utilisateurs.  
 Ce projet a été réalisé dans le cadre d’un travail collaboratif pour appliquer les concepts de **Git**, **CI/CD**, **tests automatisés**, et **DevOps**.
 
 ---
 
-## 🚀 Fonctionnalités Principales
+##  Fonctionnalités Principales
 
-- ✏️ Création, modification, suppression de tâches
-- 👥 Attribution de tâches à des utilisateurs
-- 📊 Système de statuts et de priorités
-- 🌐 Interface responsive (React)
-- 🧩 API REST (Express.js)
-- 🧪 Tests automatisés (unitaires, intégration, E2E avec Selenium)
-- ⚙️ Pipeline CI/CD (GitHub Actions)
-- 📈 Monitoring basique
+-  Création, modification, suppression de tâches
+-  Attribution de tâches à des utilisateurs
+-  Système de statuts et de priorités
+-  Interface responsive (React)
+-  API REST (Express.js)
+-  Tests automatisés (unitaires, intégration, E2E avec Selenium)
+-  Pipeline CI/CD (GitHub Actions)
+-  Monitoring basique
 
 ---
 
-## 📁 Structure du projet
+##  Structure du projet
 
 ```
 projet-gestionnaire-taches/
@@ -34,40 +34,40 @@ projet-gestionnaire-taches/
 
 ---
 
-## 🔧 Commandes à exécuter pour démarrer le projet
+##  Commandes à exécuter pour démarrer le projet
 
-### 📂 Cloner le dépôt
+###  Cloner le dépôt
 ```bash
 git clone https://github.com/Nisseya/proj_cicd.git
 cd gestionnaire-taches-web
 ```
 
-### 🌳 Créer une branche pour travailler
+###  Créer une branche pour travailler
 ```bash
 git checkout -b dev
 ```
 
-### 💻 Initialiser le frontend
+###  Initialiser le frontend
 ```bash
 cd frontend
 npm install
 npm start
 ```
 
-### 🖥️ Initialiser le backend
+###  Initialiser le backend
 ```bash
 cd ../backend
 npm install
 npm run dev
 ```
 
-### 🧪 Lancer les tests E2E (Selenium)
+### Lancer les tests E2E (Selenium)
 ```bash
 cd ../tests
 pytest tests/test_selenium.py --html=report.html --self-contained-html
 ```
 
-### 🧪 Linter le code React
+### Linter le code React
 ```bash
 cd ../frontend
 npx eslint .
@@ -75,38 +75,38 @@ npx eslint .
 
 ---
 
-## 🧪 Tests & Qualité
+## Tests & Qualité
 
-- ✅ **Tests E2E** avec Selenium + Pytest
-- ✅ **Linting** du code frontend avec ESLint
-- ✅ **Tests unitaires** frontend (Jest)
-- ✅ **Rapports HTML automatisés** via GitHub Actions
-- ❓ *(Optionnel)* : tests backend via Jest/Supertest
+- **Tests E2E** avec Selenium + Pytest
+- **Linting** du code frontend avec ESLint
+- **Tests unitaires** frontend (Jest)
+- **Rapports HTML automatisés** via GitHub Actions
+- *(Optionnel)* : tests backend via Jest/Supertest
 
 ---
 
 ## 🔁 Intégration Continue & Déploiement (CI/CD)
 
 - **GitHub Actions** :
-  - ✅ Tests automatisés (frontend, Selenium)
-  - ✅ Lint automatique
-  - ✅ Génération de rapports
-  - ✅ Build frontend
-  - ✅ Déploiement GitHub Pages (`frontend/build`)
+  -  Tests automatisés (frontend, Selenium)
+  -  Lint automatique
+  -  Génération de rapports
+  -  Build frontend
+  -  Déploiement GitHub Pages (`frontend/build`)
 - **Backend** déployé manuellement sur **Render**
 
 ---
 
-## ⚙️ Installation & Lancement
+##  Installation & Lancement
 
-### 📦 Backend (Node.js / Express)
+### Backend (Node.js / Express)
 ```bash
 cd backend
 npm install
 npm run dev
 ```
 
-### 💻 Frontend (React)
+### Frontend (React)
 ```bash
 cd frontend
 npm install
@@ -115,7 +115,7 @@ npm start
 
 ---
 
-## 🔐 Accès par défaut
+## Accès par défaut
 
 ```text
 Username : admin@test.com
@@ -124,7 +124,7 @@ Password : password
 
 ---
 
-## 🧠 Technologies utilisées
+##  Technologies utilisées
 
 - React (Frontend)
 - Express (Backend)
@@ -136,7 +136,7 @@ Password : password
 
 ---
 
-## 👥 Équipe projet
+##  Équipe projet
 
 | Nom        | Rôle             |
 |------------|------------------|
@@ -146,7 +146,7 @@ Password : password
 
 ---
 
-## 📈 Suivi & Innovation
+##  Suivi & Innovation
 
 - Utilisation des branches `main`, `dev` avec protection
 - Suivi via GitHub Issues et Projets
@@ -157,9 +157,9 @@ Password : password
 
 ---
 
-## 🧪 Détail des tests automatisés
+##  Détail des tests automatisés
 
-### 📸 Tests End-to-End (E2E) avec Selenium
+###  Tests End-to-End (E2E) avec Selenium
 
 Les tests Selenium simulent une vraie interaction utilisateur avec l'interface frontend (`localhost:3000`). Exemple :
 
@@ -218,8 +218,18 @@ def test_create_task(auth_token):
 
 Ces tests sont automatisés et peuvent être exécutés avec :
 ```bash
-pytest tests/
+pytest tests/ - v
 ```
 
 
----
+### Déploiement
+
+Le déploiement automatique se fait sur la branche main. On déploie le Backend sur Render (plan gratuit j'ai 30 centimes sur le compte en banque) et le frontend sur Vercel.
+
+L'app est accessible directement sur ce lien:
+https://proj-cicd-nisseyas-projects.vercel.app/
+
+
+Le déploiement est automatisé, a chaque mise à jour de la branche main, le dev et le back se rebuild et déploient.
+
+Pour faire ca, on a du toucher le code js et ajouter une variable d'environnemene,t uqi vaut le lien de l'api render si le env existe (on a configuré l'env directement sur vercel) et sinon le serv local créé pour les tests.
