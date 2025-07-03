@@ -140,9 +140,9 @@ Password : password
 
 | Nom        | Rôle             |
 |------------|------------------|
-| Membre 1   | Dev Frontend     |
-| Membre 2   | Dev Backend      |
-| Membre 3   | DevOps / QA      |
+| Yassine    | Tests            |
+| Neyla      | Dev Ops          |
+| Hugo       | Git              |
 
 ---
 
@@ -154,19 +154,6 @@ Password : password
   - Vue calendrier
   - Drag & Drop des tâches
   - Notifications par email
-
----
-
-## 📄 Licence
-
-Ce projet est sous licence [ISC](./LICENSE)
-
----
-
-## 🙌 Remerciements
-
-Projet réalisé dans le cadre du module **DevOps / CI/CD**.
-
 
 ---
 
