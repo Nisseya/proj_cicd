@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTask } from '../contexts/TaskContext';
+import PropTypes from 'prop-types';
+
 
 const TaskForm = ({ task, onClose }) => {
   const [formData, setFormData] = useState({
@@ -125,6 +127,21 @@ const TaskForm = ({ task, onClose }) => {
       </div>
     </div>
   );
+};
+
+TaskForm.propTypes = {
+  task: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    title: PropTypes.string,
+    description: PropTypes.string,
+    priority: PropTypes.oneOf(['low', 'medium', 'high']),
+    assignedTo: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  }),
+  onClose: PropTypes.func.isRequired,
+};
+
+TaskForm.defaultProps = {
+  task: null,
 };
 
 export default TaskForm;

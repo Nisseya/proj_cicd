@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
+import PropTypes from 'prop-types';
 
 const TaskContext = createContext();
 
@@ -20,7 +21,7 @@ export const TaskProvider = ({ children }) => {
 
   const fetchTasks = async () => {
     if (!token) return;
-    
+
     try {
       setLoading(true);
       const response = await axios.get('/api/tasks');
@@ -34,7 +35,7 @@ export const TaskProvider = ({ children }) => {
 
   const fetchUsers = async () => {
     if (!token) return;
-    
+
     try {
       const response = await axios.get('/api/users');
       setUsers(response.data);
@@ -106,4 +107,8 @@ export const TaskProvider = ({ children }) => {
       {children}
     </TaskContext.Provider>
   );
+};
+
+TaskProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
