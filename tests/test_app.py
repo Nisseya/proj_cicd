@@ -17,11 +17,9 @@ def user_credentials():
 
 @pytest.fixture(scope="module")
 def auth_token(user_credentials):
-    # Register
     reg_res = requests.post(f"{BASE_URL}/api/auth/register", json=user_credentials)
-    assert reg_res.status_code in [200, 201, 400]  # 400 si déjà existant
+    assert reg_res.status_code in [200, 201, 400]
 
-    # Login
     login_res = requests.post(f"{BASE_URL}/api/auth/login", json={
         "email": user_credentials["email"],
         "password": user_credentials["password"]
