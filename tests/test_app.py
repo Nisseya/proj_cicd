@@ -73,3 +73,16 @@ def test_get_users(auth_token):
     res = requests.get(f"{BASE_URL}/api/users", headers=headers)
     assert res.status_code == 200
     assert isinstance(res.json(), list)
+
+def test_get_tasks_without_token():
+    res = requests.get(f"{BASE_URL}/api/tasks")
+    assert res.status_code == 401
+
+def test_register_existing_user(user_credentials):
+    res = requests.post(f"{BASE_URL}/api/auth/register", json=user_credentials)
+    assert res.status_code == 400  # ou 409 si conflit
+
+def test_delete_nonexistent_task(auth_token):
+    headers = {"Authorization": f"Bearer {auth_token}"}
+    res = requests.delete(f"{BASE_URL}/api/tasks/fake-id-123", headers=headers)
+    assert res.status_code in [404, 400]
